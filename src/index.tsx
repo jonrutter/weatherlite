@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 // import { Provider } from 'react-redux';
 
+// fonts
 import '@fontsource/open-sans';
 import '@fontsource/nunito';
 
@@ -10,9 +11,11 @@ import '@fontsource/nunito';
 
 // import { store } from './app/store';
 
+// app
 import { App } from './app';
 // import { saveState } from './app/localStorage';
 
+// styles
 import './styles/index.css';
 
 // store.subscribe(() => {
@@ -34,6 +37,11 @@ import './styles/index.css';
 // }
 
 // start();
+
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = require('./app/mocks/browser');
+  worker.start();
+}
 
 ReactDOM.render(
   <React.StrictMode>
