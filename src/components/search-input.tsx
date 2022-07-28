@@ -1,150 +1,150 @@
-import React, { FC, useState } from 'react';
-import { Location } from '../types';
+import React, { ChangeEvent, Fragment, useState } from 'react';
+import { LocationData } from '../types';
 import debounce from 'lodash/debounce';
 
 // components
-import AsyncSelect from 'react-select/async';
-// import { AsyncPaginate } from 'react-select-async-paginate';
+import { Combobox, Transition } from '@headlessui/react';
+import { Spinner } from './spinner';
 
 // api
 import { fetchLocations } from '../app/api';
 
-// debounced input handler
+// icons
+import {
+  HiSelector as SelectorIcon,
+  HiCheck as CheckIcon,
+} from 'react-icons/hi';
+
+// debounced api wrapper function
 const _loadLocations = (
   value: string,
-  successCallback: (arg0: any) => void
+  startCallback: () => void,
+  successCallback: (_: any) => void,
+  errorCallback: (_: any) => void,
+  finallyCallback: () => void
 ) => {
+  // only perform a fetch if there is an actual input value
+  if (value === '') return;
+  startCallback();
   fetchLocations(value)
-    .then((data) => successCallback(data))
-    .catch((error) => console.error(error.message));
+    .then((data) => successCallback([...data].reverse()))
+    .catch((error) => errorCallback(error.message))
+    .finally(() => finallyCallback());
 };
-const loadLocations = debounce(_loadLocations, 300);
+const loadLocations = debounce(_loadLocations, 1000);
 
+// prop types
 type Props = {
-  onChange: (_: string | null) => void;
+  onChange: (_: LocationData) => void;
 };
 
-type Option = {
-  value: string;
-  label: string;
-};
+/**
+ * A component that renders
+ */
+export const SearchInput: React.FC<Props> = ({ onChange }) => {
+  // the selected option, updated when the user selects a value from the combobox options
+  const [selected, setSelected] = useState<LocationData | null>(null);
+  // the input value, updated by typing in the combobox input
+  const [input, setInput] = useState<string>('');
+  // whether the component is currently fetching data from the api
+  const [loading, setLoading] = useState<boolean>(false);
+  // the data returned from the api
+  const [results, setResults] = useState<LocationData[]>([]);
 
-export interface ColourOption {
-  readonly value: string;
-  readonly label: string;
-  readonly color: string;
-  readonly isFixed?: boolean;
-  readonly isDisabled?: boolean;
-}
-
-export const colourOptions: readonly ColourOption[] = [
-  { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
-  { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
-  { value: 'purple', label: 'Purple', color: '#5243AA' },
-  { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
-  { value: 'orange', label: 'Orange', color: '#FF8B00' },
-  { value: 'yellow', label: 'Yellow', color: '#FFC400' },
-  { value: 'green', label: 'Green', color: '#36B37E' },
-  { value: 'forest', label: 'Forest', color: '#00875A' },
-  { value: 'slate', label: 'Slate', color: '#253858' },
-  { value: 'silver', label: 'Silver', color: '#666666' },
-];
-
-const filterColors = (inputValue: string) => {
-  return colourOptions.filter((i) =>
-    i.label.toLowerCase().includes(inputValue.toLowerCase())
-  );
-};
-
-const loadOptions = (inputValue: string) =>
-  new Promise<ColourOption[]>((resolve) => {
-    setTimeout(() => {
-      resolve(filterColors(inputValue));
-    }, 1000);
-  });
-
-export const SearchInput: FC<Props> = ({ onChange }) => {
-  const [input, setInput] = useState<string | null>('');
-  const [error, setError] = useState<string>('');
-
-  const handleChange = (value: string | null) => {
-    setInput(value);
-    onChange(value);
+  const handleSelect = (location: LocationData | null) => {
+    if (location) {
+      // if there is a location, update state and pass the new location value to the callback provided by the parent component
+      setSelected(location);
+      onChange(location);
+    }
   };
 
-  // const loadOptions = (
-  //   value: string | null
-  // ): { options: Option[] } | Promise<{ options: Option[] }> => {
-  //   if (value) {
-  //     return fetchLocations(value)
-  //       .then((cities) => {
-  //         return {
-  //           options: cities
-  //             .filter((city) => city.name && city.longitude && city.latitude)
-  //             .map((city) => ({
-  //               value: `${city.latitude} ${city.longitude}`,
-  //               label: city.name as string,
-  //             })),
-  //         };
-  //       })
-  //       .catch((err) => {
-  //         console.error(err.message);
-  //         return { options: [] };
-  //       });
-
-  //     // const cities = await fetchLocations(value);
-  //     // const result: { options: Option[] } = { options: [] };
-  //     // cities.forEach((city) => {
-  //     //   if (city.name && city.latitude && city.longitude) {
-  //     //     result.options.push({
-  //     //       value: { lat: city.latitude, lon: city.longitude },
-  //     //       label: city.name,
-  //     //     });
-  //     //   }
-  //     // });
-  //   } else {
-  //     return { options: [] } as { options: Option[] };
-  //   }
-  // };
-
-  // const loadOptions = async (value: string | null) => {
-  //   return {
-  //     options: [
-  //       {
-  //         value: 'london',
-  //         label: 'London: UK',
-  //       },
-  //       {
-  //         value: 'paris',
-  //         label: 'Paris: France',
-  //       },
-  //       {
-  //         value: 'geneva',
-  //         label: 'Geneva, Switzerland',
-  //       },
-  //       {
-  //         value: 'barcelona',
-  //         label: 'Barcelona, Spain',
-  //       },
-  //     ],
-  //   };
-  // };
-
-  // return (
-  //   <AsyncPaginate
-  //     placeholder="Search for locations"
-  //     debounceTimeout={500}
-  //     value={input}
-  //     onChange={handleChange}
-  //     loadOptions={loadOptions}
-  //   />
-  // );
+  const handleInput = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setInput(value);
+    // do not attempt to fetch more locations if a fetch is already in progress
+    if (loading) return;
+    // fetch locations from the api based on the input value
+    loadLocations(
+      value,
+      () => setLoading(true),
+      setResults,
+      (err) => console.log(err),
+      () => setLoading(false)
+    );
+  };
 
   return (
-    <AsyncSelect
-      placeholder="Enter location"
-      cacheOptions
-      loadOptions={loadOptions}
-    />
+    <div className="w-72 relative">
+      <Combobox value={selected} onChange={handleSelect}>
+        <Combobox.Label className="inline-block">
+          Search for cities:
+        </Combobox.Label>
+        <div className="relative mt-1">
+          <div className="relative w-full cursor-default overflow-hidden rounded-md bg-white text-left shadow-md focus:outline-none sm:text-sm focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2 focus-within:ring-offset-medBlue-light">
+            <Combobox.Input
+              className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5"
+              displayValue={(result: LocationData | null) =>
+                result?.name && result?.region
+                  ? `${result?.name}, ${result?.region}`
+                  : input
+              }
+              onChange={handleInput}
+              disabled={loading}
+            />
+            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+              <SelectorIcon className="h-5 w-5" aria-hidden="true" />
+            </Combobox.Button>
+          </div>
+          <Transition
+            as={Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Combobox.Options className="absolute mt-2 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+              {loading ? (
+                <div className="relative cursor-default select-none py-2 px-4 text-grey-700 flex justify-center items-center">
+                  <Spinner size="sm" />
+                </div>
+              ) : results.length === 0 ? (
+                <div className="relative cursor-default select-none py-2 px-4 text-grey-700">
+                  No results found
+                </div>
+              ) : (
+                results.map((result) => (
+                  <Combobox.Option
+                    key={result.id}
+                    className={({ active }) =>
+                      `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                        active && 'bg-grey-300'
+                      }`
+                    }
+                    value={result}
+                  >
+                    {({ selected }) => (
+                      <>
+                        <span
+                          className={`block ${
+                            selected ? 'font-medium' : 'font-normal'
+                          }`}
+                        >
+                          {result.name}, {result.region}
+                        </span>
+                        {selected ? (
+                          <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <CheckIcon className="h-5 w-5" />
+                          </span>
+                        ) : null}
+                      </>
+                    )}
+                  </Combobox.Option>
+                ))
+              )}
+            </Combobox.Options>
+          </Transition>
+        </div>
+      </Combobox>
+    </div>
   );
 };
