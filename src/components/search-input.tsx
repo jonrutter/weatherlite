@@ -10,10 +10,7 @@ import { Spinner } from './spinner';
 import { fetchLocations } from '../app/api';
 
 // icons
-import {
-  HiSelector as SelectorIcon,
-  HiCheck as CheckIcon,
-} from 'react-icons/hi';
+import { SelectorIcon, CheckIcon } from '@heroicons/react/solid';
 
 // debounced api wrapper function
 const _loadLocations = (
