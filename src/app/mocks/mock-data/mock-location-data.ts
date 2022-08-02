@@ -1,4 +1,14 @@
-export const mockLocationData = {
+import type { LocationData } from '../../../types';
+
+type LocationResponse = {
+  data: LocationData[];
+  metadata: {
+    currentOffset: number;
+    totalCount: number;
+  };
+};
+
+export const mockLocationData: LocationResponse = {
   data: [
     {
       id: 172037,
