@@ -8,7 +8,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['"Open Sans"', ...defaultTheme.fontFamily.sans],
+        sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
         number: ['Nunito', ...defaultTheme.fontFamily.sans],
         heading: ['Nunito', ...defaultTheme.fontFamily.sans],
       },

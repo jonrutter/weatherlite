@@ -6,6 +6,10 @@ import ReactDOM from 'react-dom';
 // fonts
 import '@fontsource/open-sans';
 import '@fontsource/nunito';
+import '@fontsource/inter';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/700.css';
+import '@fontsource/inter/900.css';
 
 // import { worker } from './api/server';
 

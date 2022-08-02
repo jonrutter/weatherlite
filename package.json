@@ -14,6 +14,7 @@
     "lint": "eslint --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@fontsource/inter": "^4.5.11",
     "@fontsource/nunito": "^4.5.1",
     "@fontsource/open-sans": "^4.5.2",
     "@headlessui/react": "^1.6.6",
