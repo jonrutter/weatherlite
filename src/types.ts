@@ -1,4 +1,4 @@
-type Nullable<T> = T | undefined | null;
+export type Nullable<T> = T | undefined | null;
 
 export type Location = {
   name: string;
@@ -149,3 +149,5 @@ type UnsuccessfulWeatherResponse = {
 };
 
 export type WeatherResponse = WeatherData | UnsuccessfulWeatherResponse;
+
+export type TimeOfDay = 'day' | 'night' | 'twilight';
