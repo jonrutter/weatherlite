@@ -20,8 +20,8 @@ import {
   WiDayCloudy,
   WiDaySunny,
   WiThunderstorm,
-  WiAlien,
 } from 'react-icons/wi';
+import { BsRainbow } from 'react-icons/bs';
 import { IconType } from 'react-icons';
 
 type IconDetails = {
@@ -99,7 +99,7 @@ const findIcon = (
   // return selectedIcon?.icon {src: selectedIcon.icon, name: selectedIcon.name} : { src: WiAlien, name: 'alien'};
   return selectedIcon?.icon
     ? { src: selectedIcon.icon, name: selectedIcon.name }
-    : { src: WiAlien, name: 'alien' };
+    : { src: BsRainbow, name: 'rainbow' };
 };
 
 /**

@@ -54,8 +54,16 @@ describe('Icon', () => {
     screen.getByTestId('heavy clouds');
   });
 
-  it('renders with invalid input', () => {
+  it('renders icon of rainbow', () => {
     render(<Icon code={100} timeOfDay="day" />);
-    screen.getByTestId('alien');
+    screen.getByTestId('rainbow');
+  });
+  it('does not render invalid input', () => {
+    render(
+      <div data-testid="wrapper">
+        <Icon code={0} timeOfDay="day" />
+      </div>
+    );
+    expect(screen.getByTestId('wrapper')).toBeEmptyDOMElement();
   });
 });
