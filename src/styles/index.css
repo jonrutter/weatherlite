@@ -8,3 +8,12 @@
     height: auto;
   }
 }
+
+@layer utilities {
+  .bg-a11y-dark .bg-a11y {
+    @apply bg-slate-900/30;
+  }
+  .bg-a11y-light .bg-a11y {
+    @apply bg-white/30;
+  }
+}
