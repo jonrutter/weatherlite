@@ -13,7 +13,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
-    "test:dev": "npm test -- --coverage --watchAll",
+    "test:dev": "npm test -- --coverage --watch",
     "test:coverage": "npm test -- --coverage"
   },
   "dependencies": {
