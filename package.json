@@ -11,7 +11,10 @@
     "dev": "react-scripts start",
     "vercel": "vercel dev",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint --ignore-path .gitignore ."
+    "lint": "eslint --ignore-path .gitignore .",
+    "lint:fix": "npm run lint -- --fix",
+    "test:dev": "npm test -- --coverage --watchAll",
+    "test:coverage": "npm test -- --coverage"
   },
   "dependencies": {
     "@fontsource/inter": "^4.5.11",
@@ -21,7 +24,6 @@
     "@heroicons/react": "^1.0.6",
     "@reach/checkbox": "^0.17.0",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "clsx": "^1.2.1",
     "date-fns": "^2.28.0",
@@ -35,6 +37,7 @@
     "web-vitals": "^1.1.2"
   },
   "devDependencies": {
+    "@testing-library/react": "^12.1.5",
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.181",
     "@types/node": "^17.0.23",
