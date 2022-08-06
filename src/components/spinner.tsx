@@ -16,6 +16,7 @@ export const Spinner: React.FC<Props> = ({ size = 'lg' }) => {
       : 'w-[5rem] h-[5rem]';
   return (
     <div
+      data-testid="loading-spinner"
       className={`rounded-full border-4 border-transparent border-t-current animate-spin ${diameter}`}
     >
       <span className="sr-only">loading</span>
