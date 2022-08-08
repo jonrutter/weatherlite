@@ -37,7 +37,9 @@ export const Footer = () => {
         </a>
       </div>
       <div>
-        <button onClick={() => setDialogOpen(true)}>Privacy Policy</button>
+        <button onClick={() => setDialogOpen(true)} className="hover:underline">
+          Privacy Policy
+        </button>
         <PrivacyDialog open={dialogOpen} onClose={() => setDialogOpen(false)} />
       </div>
     </footer>
