@@ -54,28 +54,32 @@ const icons: IconDetails[] = [
     cases: [{ weather: ['snow'] }],
   },
   { icon: WiHail, name: 'hail', cases: [{ weather: ['hail'] }] },
-  { icon: WiWindy, name: 'atmospheric', cases: [{ weather: ['atmospheric'] }] },
+  {
+    icon: WiWindy,
+    name: 'fog, mist, or other atmospheric condition',
+    cases: [{ weather: ['atmospheric'] }],
+  },
   {
     icon: WiDaySunny,
-    name: 'sun',
+    name: 'clear weather (day)',
     cases: [{ weather: ['clear'], time: ['day', 'twilight'] }],
   },
   {
     icon: WiNightClear,
-    name: 'moon',
+    name: 'clear weather (night)',
     cases: [{ weather: ['clear'], time: ['night'] }],
   },
   {
     icon: WiDayCloudy,
-    name: 'clouds with sun',
+    name: 'partly cloudy (day)',
     cases: [{ weather: ['lightClouds'], time: ['day', 'twilight'] }],
   },
   {
     icon: WiNightAltCloudy,
-    name: 'clouds with moon',
+    name: 'partly cloudy (night)',
     cases: [{ weather: ['lightClouds'], time: ['night'] }],
   },
-  { icon: WiCloud, name: 'light clouds', cases: [{ weather: ['clouds'] }] },
+  { icon: WiCloud, name: 'cloudy', cases: [{ weather: ['clouds'] }] },
   {
     icon: WiCloudy,
     name: 'heavy clouds',
@@ -123,7 +127,6 @@ export const Icon: React.FC<Props> = ({
 
   return (
     <Tag
-      data-testid={icon.name}
       className={'max-w-full h-auto pointer-events-none'}
       aria-label={icon.name}
       {...rest}
