@@ -172,7 +172,7 @@ type DailyForecast = {
   weather: WeatherStump[];
 };
 
-type WeatherAlert = {
+export type WeatherAlert = {
   sender_name?: Nullable<string>;
   event?: Nullable<string>;
   start?: Nullable<number>;
@@ -181,30 +181,32 @@ type WeatherAlert = {
   tags?: unknown[];
 };
 
+export type CurrentWeather = {
+  dt: Nullable<number>;
+  sunrise: Nullable<number>;
+  sunset: Nullable<number>;
+  temp: Nullable<number>;
+  feels_like: Nullable<number>;
+  pressure?: Nullable<number>;
+  humidity?: Nullable<number>;
+  dew_point?: Nullable<number>;
+  clouds?: Nullable<number>;
+  uvi?: Nullable<number>;
+  visibility?: Nullable<number>;
+  wind_speed?: Nullable<number>;
+  wind_gust?: Nullable<number>;
+  wind_deg?: Nullable<number>;
+  rain?: Nullable<{ '1h': Nullable<number> }>;
+  snow?: Nullable<{ '1h': Nullable<number> }>;
+  weather: WeatherStump[];
+};
+
 export type WeatherData = {
   lat: Nullable<number>;
   lon: Nullable<number>;
   timezone: Nullable<string>;
   timezone_offset: Nullable<number>;
-  current: {
-    dt: Nullable<number>;
-    sunrise: Nullable<number>;
-    sunset: Nullable<number>;
-    temp: Nullable<number>;
-    feels_like: Nullable<number>;
-    pressure?: Nullable<number>;
-    humidity?: Nullable<number>;
-    dew_point?: Nullable<number>;
-    clouds?: Nullable<number>;
-    uvi?: Nullable<number>;
-    visibility?: Nullable<number>;
-    wind_speed?: Nullable<number>;
-    wind_gust?: Nullable<number>;
-    wind_deg?: Nullable<number>;
-    rain?: Nullable<{ '1h': Nullable<number> }>;
-    snow?: Nullable<{ '1h': Nullable<number> }>;
-    weather: WeatherStump[];
-  };
+  current: CurrentWeather;
   minutely: MinuteForecast[];
   hourly: HourlyForecast[];
   daily: DailyForecast[];
