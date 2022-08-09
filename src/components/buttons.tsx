@@ -17,10 +17,10 @@ export const PrimaryButton: React.FC<Props> = ({
       disabled={disabled}
       {...rest}
       className={clsx(
-        'text-white font-bold text-base py-2 px-4 inline rounded-md',
+        'text-white font-bold text-base py-2 px-4 inline rounded-md transition-all',
         disabled
           ? 'bg-slate-500 cursor-default'
-          : 'bg-slate-900 cursor-pointer',
+          : 'bg-slate-900 cursor-pointer hover:bg-slate-900/70',
         className
       )}
     >
