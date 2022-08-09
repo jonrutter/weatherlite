@@ -16,6 +16,7 @@ export const codeToWeatherEvent = (code: number): WeatherEvent | null => {
       })
     ) {
       targetEvent = event as WeatherEvent; // explicitly typing as `WeatherEvent`; this is safe because all events are keys of `weatherEvents`, and the `WeatherEvent` type is defined as being the keys of `weatherEvents`;
+      break;
     }
   }
   return targetEvent || null;
