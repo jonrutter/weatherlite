@@ -4,7 +4,11 @@ import { render, screen, waitFor } from '@testing-library/react';
 import { Footer } from '../footer';
 import userEvent from '@testing-library/user-event';
 
-const Component = <Footer />;
+const Component = (
+  <div data-testid="wrapper">
+    <Footer />
+  </div>
+);
 
 describe('Footer', () => {
   it('renders the correct content', () => {
@@ -15,6 +19,7 @@ describe('Footer', () => {
     screen.getByText(/privacy policy/i);
     expect(socialLink).toHaveAttribute('href');
     expect(codeLink).toHaveAttribute('href');
+    expect(screen.getByTestId('wrapper')).toContainHTML('footer');
   });
   it('opens the privacy dialog', async () => {
     render(Component);
