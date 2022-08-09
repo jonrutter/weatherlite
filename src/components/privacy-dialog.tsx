@@ -50,7 +50,7 @@ export const PrivacyDialog: React.FC<Props> = ({ open, onClose }) => (
       <div className="flex justify-end">
         <button
           onClick={onClose}
-          className="bg-green-700 text-white py-1 px-3 rounded-md shadow-md text-base"
+          className="bg-green-700 text-white py-1 px-3 rounded-md shadow-md text-base transition-all hover:opacity-70"
         >
           Got it! 👍
         </button>
