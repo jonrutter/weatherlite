@@ -49,6 +49,18 @@ describe('WeatherAlert', () => {
       expect(screen.queryByText(/close/i)).not.toBeInTheDocument();
     });
   });
+  it('correctly allows the dialog to close', async () => {
+    // ensures proper `<Dialog />` functionality (e.g., pressing ESCAPE closes the dialog)
+    render(Component);
+    // after pressing the open button, the dialog should open
+    await userEvent.click(screen.getByText(/test alert/i));
+    await waitFor(() => {
+      screen.getByText(/close/i);
+    });
+
+    // simulate pressing Escape key
+    await userEvent.keyboard('{Escape}');
+    // dialog should no longer be in the document
     await waitFor(() => {
       expect(screen.queryByText(/close/i)).not.toBeInTheDocument();
     });
@@ -82,5 +94,13 @@ describe('WeatherAlert', () => {
     screen.getByText(testAlert.description as string);
     // the sender information should be visible and correct
     screen.getByText(testAlert.sender_name as string);
+  });
+  it('correctly handles empty data', () => {
+    render(
+      <div data-testid="wrapper">
+        <WeatherAlert alert={{}} />
+      </div>
+    );
+    expect(screen.getByTestId('wrapper')).toBeEmptyDOMElement();
   });
 });

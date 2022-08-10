@@ -22,10 +22,17 @@ type Props = {
 
 export const WeatherAlert: React.FC<Props> = ({ alert }) => {
   const [open, setOpen] = useState(false);
-  if (!alert) return null;
-  const { description, event, sender_name: senderName, start, end } = alert;
-  if (!event || !description || !senderName || !start || !end) return null;
+  if (
+    !alert ||
+    !alert?.event ||
+    !alert?.description ||
+    !alert?.sender_name ||
+    !alert?.start ||
+    !alert?.end
+  )
+    return null;
 
+  const { description, event, sender_name: senderName, start, end } = alert;
   const startDate = new Date(start * 1000);
   const endDate = new Date(end * 1000);
 
