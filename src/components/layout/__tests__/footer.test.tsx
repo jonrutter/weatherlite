@@ -26,13 +26,13 @@ describe('Footer', () => {
     const privacyButton = screen.getByText(/privacy policy/i);
 
     // clicking the button labeled 'privacy policy' should open a modal
-    userEvent.click(privacyButton);
+    await userEvent.click(privacyButton);
     await waitFor(() => {
       screen.getByTestId('privacy-dialog');
     });
 
     // clicking the close button should close the modal
-    userEvent.click(screen.getByText(/got it/i));
+    await userEvent.click(screen.getByText(/got it/i));
     await waitFor(() => {
       expect(screen.queryByTestId('privacy-dialog')).not.toBeInTheDocument();
     });
