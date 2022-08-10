@@ -13,8 +13,9 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint --ignore-path .gitignore .",
     "lint:fix": "npm run lint -- --fix",
-    "test:dev": "npm test -- --coverage --watch",
-    "test:coverage": "npm test -- --coverage"
+    "test:dev": "npm test -- --watch --coverage",
+    "test:coverage": "npm run test -- --coverage --watchAll",
+    "test:ci": "CI=true npm run test -- --coverage"
   },
   "dependencies": {
     "@fontsource/inter": "^4.5.11",
@@ -24,7 +25,7 @@
     "@heroicons/react": "^1.0.6",
     "@reach/checkbox": "^0.17.0",
     "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/user-event": "^12.8.3",
+    "@testing-library/user-event": "^14.4.3",
     "clsx": "^1.2.1",
     "date-fns": "^2.28.0",
     "lodash": "^4.17.21",
