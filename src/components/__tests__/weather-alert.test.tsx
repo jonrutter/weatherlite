@@ -29,7 +29,8 @@ const testAlert: WeatherAlertType = {
 const Component = <WeatherAlert alert={testAlert} />;
 
 describe('WeatherAlert', () => {
-  it('the alert opens and closes correctly', async () => {
+  it('opens and closes correctly', async () => {
+    // the internal component UI should allow closing and opening the dialog
     render(Component);
     // the information should not immediately be in the dom
     expect(
@@ -37,20 +38,24 @@ describe('WeatherAlert', () => {
     ).not.toBeInTheDocument();
     // click the toggle button
     // after pressing the open button, the dialog should open
-    userEvent.click(screen.getByText(/test alert/i));
+    await userEvent.click(screen.getByText(/test alert/i));
     await waitFor(() => {
       screen.getByText(/close/i);
     });
 
     // after pressing the close button, the dialog should close
-    userEvent.click(screen.getByText(/close/i));
+    await userEvent.click(screen.getByText(/close/i));
+    await waitFor(() => {
+      expect(screen.queryByText(/close/i)).not.toBeInTheDocument();
+    });
+  });
     await waitFor(() => {
       expect(screen.queryByText(/close/i)).not.toBeInTheDocument();
     });
   });
   it('renders the correct information', async () => {
     render(Component);
-    userEvent.click(screen.getByText(/test alert/i));
+    await userEvent.click(screen.getByText(/test alert/i));
 
     // wait for the dialog to be open
     await waitFor(() => {
