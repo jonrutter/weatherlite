@@ -113,12 +113,7 @@ type WeatherStump = {
   icon: Nullable<string>;
 };
 
-type MinuteForecast = {
-  dt: Nullable<number>;
-  precipitation: Nullable<number>;
-};
-
-type HourlyForecast = {
+export type HourlyForecastType = {
   dt: Nullable<number>;
   temp: Nullable<number>;
   feels_like: Nullable<number>;
@@ -137,7 +132,7 @@ type HourlyForecast = {
   weather: WeatherStump[];
 };
 
-type DailyForecast = {
+type DailyForecastType = {
   dt: Nullable<number>;
   sunrise: Nullable<number>;
   sunset: Nullable<number>;
@@ -207,9 +202,8 @@ export type WeatherData = {
   timezone: Nullable<string>;
   timezone_offset: Nullable<number>;
   current: CurrentWeather;
-  minutely: MinuteForecast[];
-  hourly: HourlyForecast[];
-  daily: DailyForecast[];
+  hourly: HourlyForecastType[];
+  daily: DailyForecastType[];
   alerts?: WeatherAlert[];
 };
 
