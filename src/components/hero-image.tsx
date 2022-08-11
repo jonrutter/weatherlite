@@ -124,7 +124,7 @@ export const HeroImage: React.FC<Props> = ({
       src={image.src}
       data-testid={image.name}
       alt="Illustration of the current weather"
-      className={`w-full h-auto pointer-events-none max-w-sm ${className}`}
+      className={`w-full h-auto pointer-events-none ${className}`}
       {...rest}
     />
   );
