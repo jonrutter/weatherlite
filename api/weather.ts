@@ -19,7 +19,7 @@ export default async function handler(
     });
   } else {
     try {
-      const endpoint = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=imperial`;
+      const endpoint = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${WEATHER_API_KEY}&units=imperial&exclude=minutely`;
       const res = await fetch(endpoint);
       const data = await res.json();
 
