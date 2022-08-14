@@ -16,4 +16,12 @@
   .bg-a11y-light .bg-a11y {
     @apply bg-white/30;
   }
+  .bg-a11y-light button.bg-a11y,
+  .bg-a11y-light a.bg-a11y {
+    @apply bg-white/80 hover:bg-white/50 transition-all;
+  }
+  .bg-a11y-dark button.bg-a11y,
+  .bg-a11y-dark a.bg-a11y {
+    @apply bg-slate-900/80 hover:bg-slate-900/50 transition-all;
+  }
 }
