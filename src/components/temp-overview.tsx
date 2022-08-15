@@ -23,7 +23,7 @@ export const TempOverview: React.FC<Props> = ({
       <img
         src={current > 40 ? ThermometerWarm : ThermometerCold}
         alt=""
-        className="max-w-[64px] h-auto"
+        className="max-w-[64px] h-auto pointer-events-none select-none"
       />
     </div>
     <div className="flex flex-col items-center md:items-start">
