@@ -27,7 +27,9 @@ const Hour: React.FC<{ forecast: HourlyForecastType }> = ({ forecast }) => (
         <Icon code={forecast?.weather[0].id} timeOfDay="day" className="mr-1" />
       )}
     </td>
-    <td className="pb-3">{forecast.pop ? toFixedZero(forecast.pop) : 0}%</td>
+    <td className="pb-3">
+      {forecast.pop ? toFixedZero(forecast.pop * 100) : 0}%
+    </td>
     <td className="pb-3">{forecast.temp && toFixedZero(forecast.temp)}°</td>
   </tr>
 );

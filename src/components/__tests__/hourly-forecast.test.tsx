@@ -47,7 +47,7 @@ const testData: HourlyForecastType[] = [
         icon: '01d',
       },
     ],
-    pop: 10,
+    pop: 0.1,
   },
   {
     dt: 1660248000,
@@ -65,7 +65,7 @@ const testData: HourlyForecastType[] = [
     weather: [
       { id: 602, main: 'Snow', description: 'heavy snow', icon: '01d' },
     ],
-    pop: 30,
+    pop: 0.3,
   },
 ];
 
