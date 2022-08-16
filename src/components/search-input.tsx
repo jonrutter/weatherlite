@@ -72,9 +72,9 @@ export const SearchInput: React.FC<Props> = ({ onChange }) => {
   };
 
   return (
-    <div className="w-72 relative">
+    <div className="w-full md:max-w-[15rem] xl:max-w-[20rem] relative">
       <Combobox value={selected} onChange={handleSelect}>
-        <Combobox.Label className="inline-block text-lg font-medium mb-2">
+        <Combobox.Label className="inline-block text-lg font-medium mb-1">
           Find your location:
         </Combobox.Label>
         <div className="relative">
