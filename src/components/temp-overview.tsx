@@ -22,7 +22,7 @@ export const TempOverview: React.FC<Props> = ({
     <div className="mr-3 hidden md:block">
       <img
         src={current > 40 ? ThermometerWarm : ThermometerCold}
-        alt=""
+        alt={`Illustration of a ${current > 40 ? 'warm' : 'cold'} thermometer `}
         className="max-w-[64px] h-auto pointer-events-none select-none"
       />
     </div>

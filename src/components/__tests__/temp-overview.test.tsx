@@ -10,7 +10,15 @@ const testTemp = {
   max: 70,
 };
 
+const lowTestTemp = {
+  current: 40,
+  feelsLike: 40,
+  min: 20,
+  max: 45,
+};
+
 const Component = <TempOverview {...testTemp} />;
+const ComponentWithLowTemp = <TempOverview {...lowTestTemp} />;
 
 describe('TempOverview', () => {
   it('renders the correct content', () => {
@@ -26,5 +34,13 @@ describe('TempOverview', () => {
     within(min).getByText(/40°/); // no F for min and max
     // the feels like temperature should match
     screen.getByText(/feels like 60°F/i);
+  });
+  it('renders a warm thermometer when the temperature is over 40 degrees', () => {
+    render(Component);
+    screen.getByAltText(/illustration of a warm thermometer/i);
+  });
+  it('renders a cold thermometer when the temperature is 40 degrees or under', () => {
+    render(ComponentWithLowTemp);
+    screen.getByAltText(/illustration of a cold thermometer/i);
   });
 });
