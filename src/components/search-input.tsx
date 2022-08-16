@@ -74,13 +74,13 @@ export const SearchInput: React.FC<Props> = ({ onChange }) => {
   return (
     <div className="w-72 relative">
       <Combobox value={selected} onChange={handleSelect}>
-        <Combobox.Label className="inline-block">
-          Search for cities:
+        <Combobox.Label className="inline-block text-lg font-medium mb-2">
+          Find your location:
         </Combobox.Label>
-        <div className="relative mt-1">
-          <div className="relative w-full cursor-default overflow-hidden rounded-md bg-white text-left shadow-md focus:outline-none sm:text-sm focus-within:ring-2 focus-within:ring-white focus-within:ring-offset-2 focus-within:ring-offset-medBlue-light">
+        <div className="relative">
+          <div className="relative w-full cursor-default overflow-hidden rounded-md bg-white text-left shadow-md focus:outline-none focus-within:ring-2 focus-within:ring-slate-700">
             <Combobox.Input
-              className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5"
+              className="w-full border-none py-2 pl-3 pr-10 text-base"
               displayValue={(result: LocationData | null) =>
                 result?.name && result?.region
                   ? `${result?.name}, ${result?.region}`
@@ -88,6 +88,7 @@ export const SearchInput: React.FC<Props> = ({ onChange }) => {
               }
               onChange={handleInput}
               disabled={loading}
+              placeholder="Toronto"
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <SelectorIcon className="h-5 w-5" aria-hidden="true" />
@@ -99,46 +100,51 @@ export const SearchInput: React.FC<Props> = ({ onChange }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Combobox.Options className="absolute mt-2 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <div
+              className="absolute mt-2 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg focus:outline-none sm:text-sm"
+              data-testid="dropdown-box"
+            >
               {loading ? (
-                <div className="relative cursor-default select-none py-2 px-4 text-grey-700 flex justify-center items-center">
+                <div className="relative cursor-default select-none py-2 px-4 text-slate-700 flex justify-center items-center">
                   <Spinner size="sm" />
                 </div>
               ) : results.length === 0 ? (
-                <div className="relative cursor-default select-none py-2 px-4 text-grey-700">
+                <div className="relative cursor-default select-none py-2 px-4 text-slate-700">
                   No results found
                 </div>
               ) : (
-                results.map((result) => (
-                  <Combobox.Option
-                    key={result.id}
-                    className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                        active && 'bg-grey-300'
-                      }`
-                    }
-                    value={result}
-                  >
-                    {({ selected }) => (
-                      <>
-                        <span
-                          className={`block ${
-                            selected ? 'font-medium' : 'font-normal'
-                          }`}
-                        >
-                          {result.name}, {result.region}
-                        </span>
-                        {selected ? (
-                          <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <CheckIcon className="h-5 w-5" />
+                <Combobox.Options>
+                  {results.map((result) => (
+                    <Combobox.Option
+                      key={result.id}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                          active && 'bg-slate-200'
+                        }`
+                      }
+                      value={result}
+                    >
+                      {({ selected }) => (
+                        <>
+                          <span
+                            className={`block ${
+                              selected ? 'font-medium' : 'font-normal'
+                            }`}
+                          >
+                            {result.name}, {result.region}
                           </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Combobox.Option>
-                ))
+                          {selected ? (
+                            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                              <CheckIcon className="h-5 w-5" />
+                            </span>
+                          ) : null}
+                        </>
+                      )}
+                    </Combobox.Option>
+                  ))}
+                </Combobox.Options>
               )}
-            </Combobox.Options>
+            </div>
           </Transition>
         </div>
       </Combobox>
