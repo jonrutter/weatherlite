@@ -44,8 +44,8 @@ export const HourlyForecast: React.FC<Props> = ({ forecast }) => {
   if (!forecast || forecast.length <= 0) return null;
 
   return (
-    <div>
-      <table className="table-fixed w-full text-sm">
+    <div className="absolute inset-4 overflow-y-auto">
+      <table className="table-fixed w-full max-w-lg text-sm mx-auto">
         <caption className="sr-only">Hourly forecast</caption>
         <thead className="w-full">
           <tr className="w-full">
