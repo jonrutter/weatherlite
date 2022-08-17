@@ -88,5 +88,12 @@
       "<rootDir>/src/app/api",
       "<rootDir>/src/index.tsx"
     ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --max-warnings 0 --ignore-path .gitignore",
+      "prettier --ignore-path .gitignore --check",
+      "npm run test -- --passWithNoTests --bail --onlyChanged --watchAll=false --findRelatedTests"
+    ]
   }
 }
