@@ -15,8 +15,11 @@
     "lint:fix": "npm run lint -- --fix",
     "test:dev": "npm test -- --watch --coverage",
     "test:coverage": "npm run test -- --coverage --watchAll",
-    "test:ci": "CI=true npm run test -- --coverage"
+    "pre-commit": "bash ./src/scripts/pre-commit.sh"
   },
+  "pre-commit": [
+    "pre-commit"
+  ],
   "dependencies": {
     "@fontsource/inter": "^4.5.11",
     "@fontsource/nunito": "^4.5.1",
