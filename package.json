@@ -11,10 +11,12 @@
     "dev": "react-scripts start",
     "vercel": "vercel dev",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint --ignore-path .gitignore .",
-    "lint:fix": "npm run lint -- --fix",
-    "test:dev": "npm test -- --watch --coverage",
+    "lint": "eslint --max-warnings 0 --ignore-path .gitignore . && prettier --ignore-path .gitignore --check .",
+    "lint:fix": "eslint --max-warnings 0 --ignore-path .gitignore --fix . && prettier --ignore-path .gitignore --write .",
+    "test:dev": "npm run test -- --watch --coverage",
     "test:coverage": "npm run test -- --coverage --watchAll",
+    "test:ci": "CI=true npm run test -- --coverage",
+    "checks": "bash ./src/scripts/checks.sh",
     "pre-commit": "bash ./src/scripts/pre-commit.sh"
   },
   "pre-commit": [
