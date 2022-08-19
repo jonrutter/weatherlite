@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // types
-import type { CurrentWeather } from '../types';
+import type { CurrentWeather, Nullable } from '../types';
 
 // components
 import { SecondaryButton } from './buttons';
@@ -35,6 +35,14 @@ const TR: React.FC<BaseProps<{ label: string }>> = ({ label, children }) => (
     {children}
   </tr>
 );
+
+/*
+I need to explicitly type check weather values are numbers,
+because their values may be 0, and because 0s are falsy values,
+1) the TR will not be rendered to the DOM (even though we want it to be), and
+2) instead, a single 0 will be rendered
+*/
+const isNum = (num: Nullable<number>): num is number => typeof num === 'number';
 
 /* Wrapper */
 
@@ -73,19 +81,19 @@ export const WeatherDetails: React.FC<BaseProps<Props>> = ({ weather }) => {
       >
         <table className="block w-full text-sm mb-4">
           <tbody className="block w-full">
-            {sunrise && (
+            {typeof sunrise === 'number' && (
               <TR label="sunrise">
                 <TH>Sunrise</TH>
                 <TD>{format(new Date(sunrise * 1000), 'p')}</TD>
               </TR>
             )}
-            {sunset && (
+            {isNum(sunset) && (
               <TR label="sunset">
                 <TH>Sunset</TH>
                 <TD>{format(new Date(sunset * 1000), 'p')}</TD>
               </TR>
             )}
-            {windSpeed && windDeg ? (
+            {isNum(windSpeed) && isNum(windDeg) ? (
               <TR label="wind">
                 <TH>Wind</TH>
                 <TD>
@@ -93,12 +101,13 @@ export const WeatherDetails: React.FC<BaseProps<Props>> = ({ weather }) => {
                 </TD>
               </TR>
             ) : null}
-            {windGust && (
+            {isNum(windGust) && (
               <TR label="gusts">
                 <TH>Gusts</TH>
                 <TD>{windGust} mph</TD>
               </TR>
             )}
+            {/* humidity row should always render, even if undefined or null, since an empty value is just 0% humidity */}
             <TR label="humidity">
               <TH>Humidity</TH>
               <TD>{humidity || 0}%</TD>
@@ -115,29 +124,30 @@ export const WeatherDetails: React.FC<BaseProps<Props>> = ({ weather }) => {
                 <TD>{mmToIn(snow['1h'])} in</TD>
               </TR>
             )}
+            {/* clouds row should always render, even if undefined or null, since an empty value is just 0% clouds */}
             <TR label="clouds">
               <TH>Cloud cover</TH>
               <TD>{clouds || 0}%</TD>
             </TR>
-            {dewPoint && (
+            {isNum(dewPoint) && (
               <TR label="dew-point">
                 <TH>Dew point</TH>
                 <TD>{toFixedZero(dewPoint)}°F</TD>
               </TR>
             )}
-            {visibility && (
+            {isNum(visibility) && (
               <TR label="visibility">
                 <TH>Visibility</TH>
                 <TD>{metersToMi(visibility)} mi</TD>
               </TR>
             )}
-            {uvi && (
+            {isNum(uvi) && (
               <TR label="uvi">
                 <TH>Max UV Index</TH>
                 <TD>{uvi}</TD>
               </TR>
             )}
-            {pressure && (
+            {isNum(pressure) && (
               <TR label="pressure">
                 <TH>Pressure</TH>
                 <TD>{pressureToInHg(pressure)} inHg</TD>
