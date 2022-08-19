@@ -13,7 +13,7 @@ const isLocation = (location: any): location is Location => {
  *
  * Returns an object of type Location, or null.
  */
-export const readLocation = () => {
+export const readLocation = (): Location | null => {
   try {
     const persistedState = localStorage.getItem('location');
     // if no state, return null
@@ -36,7 +36,7 @@ export const readLocation = () => {
 /**
  * Persists location data to localStorage
  */
-export const setLocation = (location: Location) => {
+export const persistLocation = (location: Location) => {
   try {
     if (isLocation(location)) {
       localStorage.setItem('location', JSON.stringify(location));
