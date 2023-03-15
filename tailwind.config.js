@@ -9,9 +9,9 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
-        number: ['Nunito', ...defaultTheme.fontFamily.sans],
-        heading: ['Nunito', ...defaultTheme.fontFamily.sans],
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
+        number: ['var(--font-nunito)', ...defaultTheme.fontFamily.sans],
+        heading: ['var(--font-nunito)', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         prussian: {
