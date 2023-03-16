@@ -1,8 +1,8 @@
 import React from 'react';
 
 // thermometer images
-import ThermometerWarm from '../images/temp-warm.png';
-import ThermometerCold from '../images/temp-cold.png';
+import ThermometerWarm from '@/assets/images/temp-warm.png';
+import ThermometerCold from '@/assets/images/temp-cold.png';
 
 // prop types
 type Props = {

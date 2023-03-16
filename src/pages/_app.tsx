@@ -1,4 +1,4 @@
-import '@/styles/index.css';
+import '@/assets/styles/index.css';
 import type { AppProps } from 'next/app';
 import { Nunito, Inter } from 'next/font/google';
 import Head from 'next/head';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Logo from '../../images/rainbow.png';
+import Logo from '@/assets/images/rainbow.png';
 
 export const Header = () => (
   <header className="w-full bg-transparent px-4 md:px-8 lg:px-20 py-4">

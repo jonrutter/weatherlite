@@ -7,19 +7,19 @@ import type { TimeOfDay, WeatherCase, WeatherEvent } from '../types';
 import { hasCase } from '../utils/weather';
 
 // images
-import Thunderstorm from '../images/thunderstorm.png';
-import Rain from '../images/rain.png';
-import Mix from '../images/mix.png';
-import Snow from '../images/snow.png';
-import Hail from '../images/hail.png';
-import Fog from '../images/fog.png';
-import Sun from '../images/sun.png';
-import MoonStars from '../images/moon-stars.png';
-import SunClouds from '../images/sun-clouds.png';
-import MoonClouds from '../images/moon-clouds.png';
-import LightClouds from '../images/light-clouds.png';
-import HeavyClouds from '../images/heavy-clouds.png';
-import Rainbow from '../images/rainbow.png';
+import Thunderstorm from '@/assets/images/thunderstorm.png';
+import Rain from '@/assets/images/rain.png';
+import Mix from '@/assets/images/mix.png';
+import Snow from '@/assets/images/snow.png';
+import Hail from '@/assets/images/hail.png';
+import Fog from '@/assets/images/fog.png';
+import Sun from '@/assets/images/sun.png';
+import MoonStars from '@/assets/images/moon-stars.png';
+import SunClouds from '@/assets/images/sun-clouds.png';
+import MoonClouds from '@/assets/images/moon-clouds.png';
+import LightClouds from '@/assets/images/light-clouds.png';
+import HeavyClouds from '@/assets/images/heavy-clouds.png';
+import Rainbow from '@/assets/images/rainbow.png';
 
 type ImageMap = {
   src: string;
