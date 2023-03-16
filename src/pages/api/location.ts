@@ -1,33 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-export type LocationData = {
-  city: string | null;
-  country: string | null;
-  countryCode: string | null;
-  id: number | null;
-  latitude: number | null;
-  longitude: number | null;
-  name: string | null;
-  population: number | null;
-  region: string | null;
-  regionCode: string | null;
-  type: string | null;
-  wikiDataId: string | null;
-};
-
-export type ErrorGeoResponse = {
-  message: string;
-};
-
-export type SuccessfulGeoResponse = {
-  data: LocationData[];
-  metadata: {
-    currentOffset: number;
-    totalCount: number;
-  };
-};
-
-export type Response = ErrorGeoResponse | SuccessfulGeoResponse;
+import type { GeoResponse } from '@/types';
 
 const apiOptions = {
   method: 'GET',
@@ -39,7 +11,7 @@ const apiOptions = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Response>
+  res: NextApiResponse<GeoResponse>
 ) {
   try {
     const { q: query } = req.query;

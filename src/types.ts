@@ -88,7 +88,7 @@ export type LocationData = {
   wikiDataId: Nullable<string>;
 };
 
-export type LocationQuery = {
+export type SuccessfulGeoResponse = {
   data: LocationData[];
   metadata: {
     currentOffset: number;
@@ -96,11 +96,11 @@ export type LocationQuery = {
   };
 };
 
-type UnsuccessfulGeoResponse = {
+type ErrorGeoResponse = {
   message: string;
 };
 
-export type GeoResponse = LocationQuery | UnsuccessfulGeoResponse;
+export type GeoResponse = SuccessfulGeoResponse | ErrorGeoResponse;
 
 /*
 Weather API responses and data
@@ -213,4 +213,8 @@ type UnsuccessfulWeatherResponse = {
   message: string;
 };
 
-export type WeatherResponse = WeatherData | UnsuccessfulWeatherResponse;
+export type ErrorWeatherResponse = {
+  message: string;
+};
+
+export type WeatherResponse = WeatherData | ErrorWeatherResponse;
