@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 // types
-import type { Location, LocationData, WeatherData } from '../types';
+import type { Location, LocationData, WeatherData } from '@/types';
 
 // localstorage
 // import { readLocation, persistLocation } from './localStorage';
 
 // api
-import { fetchWeather } from './api';
+import { fetchWeather } from '@/api/api';
 
 // hero image
-import HeroImage from '../images/rainbow.png';
+import HeroImage from '@/assets/images/rainbow.png';
 
 // components
-import { HomeLayout } from '../components/pages/home-page';
-import { LoadingPage } from '../components/pages/loading-page';
-import { WeatherPage } from '../components/pages/weather-page';
-import { SearchInput } from '../components/search-input';
-import { PrimaryButton } from '../components/buttons';
+import { HomeLayout } from '@/components/pages/home-page';
+import { LoadingPage } from '@/components/pages/loading-page';
+import { WeatherPage } from '@/components/pages/weather-page';
+import { SearchInput } from '@/components/search-input';
+import { PrimaryButton } from '@/components/buttons';
 
-export const App = () => {
+export const WeatherApp = () => {
   // const [location, setLocation] = useState<Location | null>(readLocation());
   const [location, setLocation] = useState<Location | null>(null);
   const [loadingWeather, setLoadingWeather] = useState<boolean>(false);
@@ -38,7 +39,7 @@ export const App = () => {
   const handleSubmitClick = () => {
     if (location) {
       setLoadingWeather(true);
-      fetchWeather(location)
+      fetchWeather(location.lat, location.lon)
         .then((data) => setWeather(data))
         .catch((err) => console.warn(err))
         .finally(() => {
@@ -70,7 +71,7 @@ export const App = () => {
         <h1 className="text-2xl sm:text-3xl md:text-[2.5rem] md:leading-none font-black mb-5 md:mb-8 lg:mb-5">
           Open-source weather app with a focus on privacy
         </h1>
-        <img
+        <Image
           src={HeroImage}
           alt="Illustration of a rainbow"
           className="max-w-lg w-full h-auto pointer-events-none select-none mx-auto lg:hidden mb-6 md:mb-8"
@@ -93,7 +94,7 @@ export const App = () => {
         </div>
       </div>
       <div>
-        <img
+        <Image
           src={HeroImage}
           alt="Illustration of a rainbow"
           className="hidden lg:block max-w-[600px] w-full h-auto pointer-events-none select-none mx-auto"
