@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 interface Props
   extends React.PropsWithChildren<React.ComponentPropsWithoutRef<'button'>> {
@@ -16,13 +15,11 @@ export const PrimaryButton: React.FC<Props> = ({
     <button
       disabled={disabled}
       {...rest}
-      className={clsx(
-        'text-white font-bold text-base py-2 px-4 inline rounded-md transition-all',
+      className={`text-white font-bold text-base py-2 px-4 inline rounded-md transition-all ${
         disabled
           ? 'bg-slate-500 cursor-default'
-          : 'bg-slate-900 cursor-pointer hover:bg-slate-900/70',
-        className
-      )}
+          : 'bg-slate-900 cursor-pointer hover:bg-slate-900/70'
+      } ${className}`}
     >
       {children}
     </button>
