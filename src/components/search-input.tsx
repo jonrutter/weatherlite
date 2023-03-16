@@ -7,7 +7,7 @@ import { Combobox, Transition } from '@headlessui/react';
 import { Spinner } from './spinner';
 
 // api
-import { fetchLocations } from '../app/api';
+import { fetchLocations } from '@/api/api';
 
 // icons
 import { SelectorIcon, CheckIcon } from '@heroicons/react/solid';
