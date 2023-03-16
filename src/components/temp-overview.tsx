@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 // thermometer images
 import ThermometerWarm from '@/assets/images/temp-warm.png';
@@ -20,7 +21,7 @@ export const TempOverview: React.FC<Props> = ({
 }) => (
   <div className="flex">
     <div className="mr-3 hidden md:block">
-      <img
+      <Image
         src={current > 40 ? ThermometerWarm : ThermometerCold}
         alt={`Illustration of a ${current > 40 ? 'warm' : 'cold'} thermometer `}
         className="max-w-[64px] h-auto pointer-events-none select-none"

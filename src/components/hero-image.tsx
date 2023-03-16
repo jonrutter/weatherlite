@@ -1,7 +1,9 @@
 import React from 'react';
+import Image from 'next/image';
 
 // types
 import type { TimeOfDay, WeatherCase, WeatherEvent } from '../types';
+import type { StaticImageData } from 'next/image';
 
 // helper funcs
 import { hasCase } from '../utils/weather';
@@ -22,7 +24,7 @@ import HeavyClouds from '@/assets/images/heavy-clouds.png';
 import Rainbow from '@/assets/images/rainbow.png';
 
 type ImageMap = {
-  src: string;
+  src: StaticImageData;
   name: string;
   cases: WeatherCase[];
 };
@@ -120,7 +122,7 @@ export const HeroImage: React.FC<Props> = ({
 }) => {
   const image = findImage(timeOfDay, event);
   return (
-    <img
+    <Image
       src={image.src}
       data-testid={image.name}
       alt="Illustration of the current weather"
