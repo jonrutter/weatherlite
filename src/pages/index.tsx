@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { WeatherApp } from '@/components/WeatherApp';
 
 export default function Home() {
   return (
@@ -6,8 +7,8 @@ export default function Home() {
       <Head>
         <title>Weatherlite</title>
       </Head>
-      <main>
-        <h1>Hello, world!</h1>
+      <main className="font-sans">
+        <WeatherApp />
       </main>
     </>
   );
