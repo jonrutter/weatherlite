@@ -1,4 +1,4 @@
-import type { LocationData, Location, WeatherData } from '../types';
+import type { LocationData, WeatherData } from '../types';
 
 /**
  * Fetches location data from a serverless function.
@@ -43,10 +43,10 @@ export const fetchLocations = async (
 /**
  * Fetches location data from a serverless function.
  *
- * Returns a promise that either resolves with an array of type LocationData[], or rejects with an error.
+ * Returns a promise that either resolves with type WeatherData, or rejects with an error.
  *
- * @param latitude - Latitude of the location to fetch the weather from
- * @param longitude - Longitude of the location to fetch the weather from
+ * @param lat - Latitude of the location to fetch the weather from
+ * @param lon - Longitude of the location to fetch the weather from
  *
  * @example
  * const lat = 43.670277777;
@@ -57,13 +57,12 @@ export const fetchLocations = async (
  *
  */
 export const fetchWeather = async (
-  location: Location
+  lat: number,
+  lon: number
 ): Promise<WeatherData> => {
   try {
     // fetch and process the data
-    const response = await fetch(
-      `/api/weather?lat=${location.lat}&lon=${location.lon}`
-    );
+    const response = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
     // catch http errors
     const data = await response.json();
     if (response.status !== 200) {
